@@ -17,8 +17,8 @@
 
 \PassOptionsToPackage{figtreepath=\kthpqthesis@figtreepath}{kthpq/kthpq-font}
 
-\PassOptionsToPackage{cmyk}{xcolor}
-\DeclareOption{HTML}{\PassOptionsToPackage{\CurrentOption}{xcolor}}
+\PassOptionsToPackage{cmyk}{kthpq-color}
+\DeclareOption{HTML}{\PassOptionsToPackage{\CurrentOption}{kthpq-color}}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
 

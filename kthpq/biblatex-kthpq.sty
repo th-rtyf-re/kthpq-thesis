@@ -1,0 +1,174 @@
+% kthpq-thesis is marked CC0 1.0 Universal. To view a copy of this mark,
+% visit https://creativecommons.org/publicdomain/zero/1.0/
+%
+% Extension of the biblatex package for the kthpq-thesis class.
+%
+% This package loads the full journal title field, provides the macros
+% - \inlinepaper
+% - \displaypaper
+% and a counter, \paper.
+%
+% This package requires the auxiliary packages kthpq-font and
+% kthpq-color.
+
+\DeclareOption*{\PassOptionsToPackage{\CurrentOption}{biblatex}}
+
+% add fjournal field to biblatex, see https://tex.stackexchange.com/a/238560/216213
+\begin{filecontents*}[overwrite]{fjournal.dbx}
+\DeclareDatamodelFields[type=field,datatype=literal]{fjournaltitle}
+\end{filecontents*}
+
+\PassOptionsToPackage{datamodel=fjournal}{biblatex}
+
+\ProcessOptions\relax
+
+\RequirePackage{biblatex}
+\RequirePackage{afterpage}
+
+\RequirePackage{kthpq/kthpq-font}
+\RequirePackage{kthpq/kthpq-color}
+
+% Add fjournaltitle field
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map{
+      \step[fieldsource=fjournal, fieldtarget=fjournaltitle]
+    }
+  }
+}
+\DeclareFieldFormat{fjournaltitle}{\mkbibemph{#1\isdot}}% copy journaltitle format
+
+\newif\if@submitted
+\@submittedfalse
+
+% ---- inline paper ----
+% Usage: \inlinepaper[submitted]{<ref>}
+\newcommand\inlinepaper[2][]{%
+  \setkeys{kthpq@inlinepaper}{#1}
+  \@inlinepaper{#2}
+}
+
+\define@key{kthpq@inlinepaper}{submitted}[true]{\csname @submitted#1\endcsname}
+
+\DeclareCiteCommand{\@inlinepaper}
+  {%
+    \pagetrackerfalse%
+    \citetrackerfalse%
+    \usebibmacro{prenote}%
+    \defcounter{maxnames}{99}%
+    \sffamily%
+  }
+  {%
+    \textbf{\printfield{labeltitle}.}
+    \printnames{author}.
+    \ifentrytype{article}{%
+      In \usebibmacro{tryfjournal},
+    }{}%
+    \ifentrytype{inbook}{%
+      In \usebibmacro{booktitle},
+    }{}%
+    \ifentrytype{incollection}{%
+      In \usebibmacro{booktitle},
+    }{}%
+    \ifentrytype{inproceedings}{%
+      In \printfield{booktitle},
+    }{}%
+    \ifentrytype{misc}{%
+      \if@submitted Submitted, \else Preprint, \fi
+    }{}%
+    \printfield{year}.
+    \printfield{doi}\printfield[eprint:arxiv]{eprint}%
+  }
+  {}
+  {\usebibmacro{postnote}}
+
+\newbibmacro{tryfjournal}{%
+  \iffieldundef{fjournaltitle}{%
+    \printfield{journaltitle}%
+  }{%
+    \printfield{fjournaltitle}%
+  }%
+}
+% ---- end inline paper ----
+
+\newcounter{paper}
+
+% ---- paper title page ----
+% Outer formatting of the paper cover page
+% Usage: \papertitlepage[color=white,submitted]{<ref>}
+\newcommand{\papertitlepage}[2][]{%
+  \setkeys{kthpq@papertitlepage}{submitted=false,#1}
+  \cleardoublepage%
+  \newgeometry{top=50mm,bottom=30mm,left=43mm,right=22mm}%
+  \thispagestyle{empty}%
+  \pagecolor{\kthpq@papertitlepage@color}% Set color for this page
+  \afterpage{\nopagecolor}% Reset the color after the current page
+  \phantomsection
+  \stepcounter{paper}
+  \addcontentsline{toc}{chapter}{\protect\numberline{\Alph{paper}}\texorpdfstring{\papertitle{#2}}{\Alph{paper}#2}}%
+  \@papertitlepage{#2}
+  \renewcommand{\thechapter}{\Alph{paper}}
+  \markboth{}{}% Reset header
+  \restoregeometry
+}
+
+% Using the built-in keyval package: https://tex.stackexchange.com/a/34314/216213
+\define@key{kthpq@papertitlepage}{color}{\def\kthpq@papertitlepage@color{#1}}
+\define@key{kthpq@papertitlepage}{submitted}[true]{\csname @submitted#1\endcsname}
+\setkeys{kthpq@papertitlepage}{color=white}
+
+% Inner formatting of the paper cover page
+\DeclareCiteCommand{\@papertitlepage}
+  {%
+    \pagetrackerfalse%
+    \citetrackerfalse%
+    \defcounter{maxnames}{99}%
+    \raggedright%
+  }
+  {%
+    \par\vspace*{5mm}
+    {\Huge\noindent\sffamily\bfseries Paper~\Alph{paper}\par}
+    \vspace{10mm}
+    {\Large\noindent\sffamily\bfseries\printfield{labeltitle}\par}
+    \vspace{10mm}
+    {\uppersf\printnames{author}\par}
+    \vspace{10mm}
+    \ifentrytype{article}{%
+      In \usebibmacro{tryfjournal}\printfield{booktitle},
+    }{}%
+    \ifentrytype{inbook}{%
+      In \usebibmacro{booktitle},
+    }{}%
+    \ifentrytype{incollection}{%
+      In \usebibmacro{booktitle},
+    }{}%
+    \ifentrytype{inproceedings}{%
+      In \printfield{booktitle},
+    }{}%
+    \ifentrytype{misc}{%
+      \if@submitted Submitted, \else Preprint, \fi
+    }{}%
+    \printfield{year}.%
+    % \printfield[eprint:arxiv]{eprint}% maybe?
+  }
+  {}
+  {}
+% ---- end paper title page ----
+
+% Usage: \papertitle{<ref>}
+\DeclareCiteCommand{\papertitle}{}{\printfield{labeltitle}}{}{}
+
+% Usage: \paperchapter[<short title>]{<ref>}
+\newcommand\paperchapter[2][\@nil]{%
+  \ifx#1\@nil
+    \@paperchapter{Paper\ \Alph{paper}.\ \papertitle{#2}}{\papertitle{#2}}%
+  \else
+    \@paperchapter{Paper\ \Alph{paper}.\ #1}{\papertitle{#2}}%
+  \fi%
+}
+
+\def\@paperchapter#1#2{%
+  \markboth{\uppersf#1}{}%
+  \chapter*{#2}%
+  \renewcommand{\thesection}{\arabic{section}}%
+}

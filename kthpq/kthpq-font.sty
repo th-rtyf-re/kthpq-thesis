@@ -1,0 +1,78 @@
+% kthpq-thesis is marked CC0 1.0 Universal. To view a copy of this mark,
+% visit https://creativecommons.org/publicdomain/zero/1.0/
+%
+% Auxiliary package for the class kthpq-thesis, loading the required
+% fonts Figtree, Georgia, and Fira Code. Designed mostly with Overleaf
+% in mind, only Figtree requires an explicit path (Georgia and Fira
+% Code are already known to Overleaf).
+% See: https://www.overleaf.com/learn/latex/Questions/Which_OTF_or_TTF_fonts_are_supported_via_fontspec%3F
+
+\RequirePackage{kvoptions}
+
+% Options
+\SetupKeyvalOptions{
+  family=kthpq,
+  prefix=kthpq@
+}
+\DeclareStringOption[auto]{figtreepath}
+\ProcessKeyvalOptions{kthpq}
+
+\newif\ifautofigtreepath
+\autofigtreepathfalse
+
+\newcommand*{\kthpq@figtreepath@auto}{% For local setups where lualatex can find Figtree on its own
+\autofigtreepathtrue
+}
+\csname kthpq@figtreepath@\kthpq@figtreepath\endcsname\relax
+
+% If your compiler is struggling to "find files", maybe try
+%   luaotfload-tool --cache=erase
+% in your terminal (https://tex.stackexchange.com/a/723526/216213).
+
+\RequirePackage{fontspec}
+\RequirePackage{unicode-math}
+
+\defaultfontfeatures{Ligatures={TeX}}
+
+% The Word template is on A4 paper; the scale down to G5 is 239/297 or roughly 0.8
+\def\fontscale{0.8}
+
+% Line spacing is close enough to the Word template
+
+% Magic from the official KTH template:
+% \setlength{\baselineskip}{13.75pt plus 1pt minus 1pt}
+
+\setmainfont{Georgia}[Scale=\fontscale]
+
+\ifautofigtreepath
+  \setsansfont{Figtree}[
+    UprightFont = *-Regular,
+    BoldFont = *-SemiBold,
+    ItalicFont = *-Italic,
+    BoldItalicFont = *-SemiBoldItalic,
+    Scale = \fontscale
+  ]
+\else
+  \setsansfont{Figtree}[
+    Path = \kthpq@figtreepath,
+    Extension = .otf,
+    UprightFont = *-Regular,
+    BoldFont = *-SemiBold,
+    ItalicFont = *-Italic,
+    BoldItalicFont = *-SemiBoldItalic,
+    Scale = \fontscale
+  ]
+\fi
+
+\setmonofont{Fira Code}[
+  Contextuals=Alternate, % Activate the calt feature
+  Scale = .75 % Better relative size
+]
+
+% Numbers=OldStyle if you're feeling chaotic
+\setmathfont{XCharter-Math}[Scale=\fontscale]
+
+\newfontface\uppersf{Figtree}[% for uppercase authors (add bold if needed)
+  Letters = Uppercase,
+  Scale = \fontscale
+]

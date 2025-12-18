@@ -1,0 +1,324 @@
+% magic comments for TeXworks (including TeXShop): https://www.tug.org/TUGboat/tb32-1/tb100wright-texworks.pdf
+% !TEX TS-program = LuaLaTeX
+% !BIB TS-program = biber
+
+%figtreepath=kthphdthesis/fonts/figtree/fonts/otf/
+\documentclass{kthpq-thesis}
+
+% Custom biblatex package to have cool macros
+\usepackage[%
+	backend=biber,% default is biber
+	bibstyle=numeric,
+	maxnames=99,
+	isbn=false,
+	url=false
+]{kthpq/biblatex-kthpq}
+
+\addbibresource{sample.bib}
+
+\geometry{showframe}
+
+\usepackage[
+%  draft, % Uncomment to remove all links (useful for printing in black and white)
+%  hidelinks,
+  pdfusetitle,
+  colorlinks,
+  linktoc=all,
+  allcolors={digital blue}
+]{hyperref}
+
+% Custom header and footer with fancyhdr
+%\fancyhf{} % reset
+%\fancyhead[LO]{\sffamily\small\rightmark}
+%\fancyhead[RE]{\sffamily\small\leftmark}
+%\fancyhead[LE,RO]{\sffamily\small\thepage} % Left for even pages, right for odd pages
+%
+%\fancypagestyle{plain}{% for special pages, e.g. first pages of chapters
+%  \fancyhf{} % reset
+%  \fancyhead[LE,RO]{\sffamily\small\thepage} % Left for even pages, right for odd pages
+%}
+
+% \setcounter{tocdepth}{1}
+
+% ==== MY DATA ====
+
+\usepackage{lipsum}
+\usepackage{metalogo}% to load \XeTeX
+
+\newcounter{lipsumpar}
+\setcounter{lipsumpar}{1}
+\newcommand{\nextlipsum}[1]{%
+  \ifnum#1<1
+  	{}
+  \else
+    \edef\oldlipsumpar{\thelipsumpar}
+    \addtocounter{lipsumpar}{#1}
+    \addtocounter{lipsumpar}{-1}
+    \lipsum[\oldlipsumpar-\thelipsumpar]
+    \stepcounter{lipsumpar}
+  \fi
+}
+
+\def\mydinkus{\par\noindent\hfill\textasciitilde~\cdot~\textasciitilde\hfill\null\par}
+
+\title{Sample document and usage hints}
+\author{Isaac Ren}
+
+% ==== END MY DATA ===
+
+\begin{document}
+
+% ---- Front matter ----
+
+\frontmatter
+
+% First two pages are placeholders that will not be printed
+\maketitle
+\makecopyright
+
+\begin{dedication}%[stretch=2,align=r]% default options
+For you!
+\end{dedication}
+
+\begin{abstract}
+The \texttt{abstract} environment can take an optional argument for the language. The \verb|\keywords| command formats keywords, and detects the current language if the language is English or Swedish.
+
+\nextlipsum{1}
+
+\keywords{word1, word2}
+\end{abstract}
+
+\begin{abstract}[swedish]
+Samma sak fast på svenska.
+
+\nextlipsum{2}
+
+\keywords{ord1, ord2}
+\end{abstract}
+
+\chapter{Popular science summary}
+
+This is optional!
+
+\nextlipsum{2}
+
+\chapter{List of papers}
+
+The \texttt{kthpq-thesis} class comes with a customized \texttt{biblatex} package, \texttt{biblatex-kthpq}. This package provides the commands \verb|\inlinepaper| and \verb|\papertitlepage|, which take a bibliography key and display the reference inline and on its own page, respectively. Both commmands can handle the following entry types: \texttt{article}, \texttt{inbook}, \texttt{incollection}, \texttt{inproceedings}, and \texttt{misc}. For \texttt{misc}, add the option \texttt{[submitted]} if you have submitted the paper.
+
+\inlinepaper{MR2021}
+
+\inlinepaper{MR2023}
+
+\inlinepaper[submitted]{GLRS2025}
+
+You can view the usage of \verb|\papertitlepage| in Part \ref{Part:papers}.
+
+
+\chapter{Acknowledgements}
+
+The class \texttt{kthpq-thesis} is inspired by features in the \href{https://www.kth.se/en/student/studier/examensarbete/avhandlingarochexamensarbeten/mall-for-avhandling-1.458236}{official KTH template}, although almost everything has been rewritten. I also referred to \href{https://www.overleaf.com/latex/templates/kth-phd-thesis-template-2024/kzrmpmhymhxq}{Vivian Peters' Overleaf template} when writing this class.
+
+\nextlipsum{2}
+
+\tableofcontents
+
+\listoffigures
+
+\listoftables
+
+\chapter{List of Abbreviations}
+
+\noindent\begin{tabular}{ll}
+H & Hello \\
+W & World!
+\end{tabular}
+
+\chapter{Nomenclature}
+
+\noindent\begin{tabular}{ll}
+Hello & A greeting \\
+World & A place
+\end{tabular}
+
+% ---- Main matter ----
+
+\mainmatter
+\newrefsection
+
+\part{Kappa}
+
+\chapter{Introduction}
+
+This is the sample document for the class \texttt{kthpq-thesis}. There exist other templates for KTH theses: see the \href{https://www.kth.se/en/student/studier/examensarbete/avhandlingarochexamensarbeten/mall-for-avhandling-1.458236}{official KTH templates}, as well as \href{https://www.overleaf.com/latex/templates/kth-phd-thesis-template-2024/kzrmpmhymhxq}{Vivian Peters' Overleaf template}. The aims of this class are as follows:
+\begin{enumerate}
+\item The class should \textbf{implement} the 2023 KTH visual identity guidelines. Aside from loading the proper fonts and colors, I also referred to the available Word template.
+\item The class should be \textbf{ready for use} without modifications. This includes providing this sample document with all of the parts of a (compilation) thesis, but you are encouraged to reorganize things as suits you.
+\item The class should be \textbf{easy to understand}. The provided commands should be easy to use, the source code should be easy to navigate and read, and this sample document should be easy to follow. In addition, the class should be modifiable/customizable with as small a learning curve as possible. In practice, this means that the class is \textbf{minimal in features} (or at least tries to be). You will still have to load many packages in your preamble.
+\item The output should \textbf{look good}. This is a matter of personal taste, of course, but this means using the recommended typefaces over the fallback ones, even if this means using a fancier compilation engine (Lua\TeX) and loading several font families.
+\item The class should \textbf{compile quickly}, to the extent that \TeX{} allows for such a thing. This is related to the minimality of the class. This is a lower priority aim, as it conflicts with several of the previous points.
+\end{enumerate}
+
+Here are several things that this class does \textbf{not} do:
+\begin{enumerate}
+\item Produce the cover pages of the thesis, nor provide the official title page and copyright page. The latter two are provided in a non-official format, with some placeholder information, mostly so that the beginning of the document looks nicer, and also because that's where the page numbering should start. The real versions of these pages are provided by US-AB.
+\item Provide alternative compilation methods. There are fallback fonts available as \TeX{} packages\footnote{The KTH guidelines offer Arial as the fallback for Figtree, which can be approximated by \TeX{} Gyre Heros or Helvetica. For Georgia, Bitstream Charter is available as a similar typeface.}, and it is also possible to use other engines such as \XeTeX to get the recommended fonts, but in the spirit of minimality, I have decided to restrict this class to Lua\TeX.
+\item Comply 100\% with the KTH guidelines. This is partially due to the incomplete specifications of the guidelines, leaving room for interpretation, and partially because certain aspects of the Word template don't look that good to me (for instance, the table of contents).
+\item Give advice about how to structure and write a thesis.
+\end{enumerate}
+
+\section{About the fonts}
+
+The main body font is Georgia. The titles and some short body text are set in the sans serif typeface \textsf{Figtree}. Monospace text is set in \texttt{Fira Code}, and mathematical text is set in $\mathrm{XCharter\ Math}$. All fonts are known to \texttt{fontspec} except for Figtree, which we provide with the class.
+
+The font sizes for various text elements are specified by the Word template. Since the Word template is on A4 paper and this class (and the printed thesis) is on G5 paper ($169 \times 239\,\text{mm}$), we set font sizes as in the Word template but then scale all fonts by $\verb|\fontscale| = 0.8$. An exception: Fira Code is scaled by $0.75$. Be sure to add \verb|Scale=\fontscale| whenever loading a new font!
+
+The mathematical font, XCharter-Math, is the closest to Georgia that I found. You can change this font by writing
+\begin{verbatim}
+\setmathfont{Other Font}[Scale=\fontscale]
+\end{verbatim}
+in the preamble. To get the classic \TeX font, use \texttt{Latin Modern Math}.
+
+\subsection{Subsection}
+
+\nextlipsum{1}
+
+\subsubsection{Subsubsection}
+
+In the \texttt{book} class (from which \texttt{kthpq-thesis} inherits), subsubsections are unnumbered by default. We turn these numbers back on.
+
+\paragraph{Paragraph}
+
+\nextlipsum{1}
+
+\subparagraph{Subparagraph}
+
+\nextlipsum{1}
+
+\section{Color test}
+
+Be sure to reference your figures and tables in the text! Figure \ref{F:primary} and Table \ref{T:secondary} show the KTH colors that are available for use. Note that \fcolorbox{black}{digital blue}{\color{white}digital blue}, \fcolorbox{black}{broken black}{\color{white}broken black}, and \fcolorbox{black}{broken white}{broken white} are digital colors only, and should not be used in print. They are only provided for completeness' sake.
+
+By default, \texttt{kthpq-thesis} loads colors via \texttt{xcolor} with the \texttt{cymk} option, suited for printing. You can change this by the \verb|\selectcolormodel| command (see \texttt{xcolor}'s documentation for more information).
+
+\begin{figure}
+\centering
+{\sffamily
+\fcolorbox{black}{white}{white}
+\fcolorbox{black}{sand}{sand}
+\fcolorbox{black}{KTH blue}{\color{white}KTH blue}
+\fcolorbox{black}{sky blue}{sky blue}
+\fcolorbox{black}{navy}{\color{white}navy}
+\fcolorbox{black}{light blue}{light blue}
+\fcolorbox{black}{digital blue}{\color{white}digital blue}}
+\caption{Primary colors.}
+\label{F:primary}
+\end{figure}
+
+\begin{table}
+\centering
+{\sffamily
+\begin{tabular}{ccc}
+\fcolorbox{black}{dark green}{\color{white}dark green}
+& \fcolorbox{black}{green}{green}
+& \fcolorbox{black}{light green}{light green}
+\\
+\fcolorbox{black}{dark turquoise}{\color{white}dark turquoise}
+& \fcolorbox{black}{turquoise}{turquoise}
+& \fcolorbox{black}{light turquoise}{light turquoise}
+\\
+\fcolorbox{black}{dark brick}{\color{white}dark brick}
+& \fcolorbox{black}{brick}{brick}
+& \fcolorbox{black}{light brick}{light brick}
+\\
+\fcolorbox{black}{dark yellow}{\color{white}dark yellow}
+& \fcolorbox{black}{yellow}{yellow}
+& \fcolorbox{black}{light yellow}{light yellow}
+\\
+\fcolorbox{black}{dark gray}{\color{white}dark gray}
+& \fcolorbox{black}{gray}{gray}
+& \fcolorbox{black}{light gray}{light gray}
+\\
+\fcolorbox{black}{broken black}{\color{white}broken black}
+&& \fcolorbox{black}{broken white}{broken white}
+\end{tabular}}
+\caption{Secondary colors.}
+\label{T:secondary}
+\end{table}
+
+\section{More features}
+
+Here is a reference: \cite{CGRST2024}.
+
+Here is some math: $1 + 1 = 2$.
+
+\chapter{To do}
+
+\begin{enumerate}
+\item Write the thesis!
+\item Add tabs to the paper title pages.
+\item Make it possible to load HTML colors?
+\item Put command arguments in $\langle\textit{brackets}\rangle$.
+\item Move things out of the template documents to make them simpler (not sure how much more I can do)
+\item \lipsum[23]
+\end{enumerate}
+
+\printbibliography[title=References,heading=bibintoc]
+
+
+\part{Papers}
+\label{Part:papers}
+\newrefsection% Reset the bibliography
+
+\papertitlepage[color=light blue]{CGRST2024}
+
+\paperchapter[Koszul Complexes and Relative Homological Algebra]{CGRST2024}
+
+\begin{paperabstract}%[.9\textwidth]% default value
+This abstract is in a \texttt{paperabstract} environment.
+\lipsum[29]
+\end{paperabstract}
+
+The usual approach to including papers is to include PDFs. \texttt{kthpq-thesis} does not provide any tools for that; use your favorite package or external method. If you wish to include your paper's \TeX{} code directly in the thesis, add the line
+\begin{verbatim}
+\paperchapter[Short title]{REF}
+\end{verbatim}
+where \texttt{REF} is the bibliography reference for the paper, and \texttt{Short title} is the title that will appear in the headers.
+
+\section{Introduction}
+
+\nextlipsum{8}
+
+\papertitlepage[color=light blue]{MR2021}
+
+\paperchapter{MR2021}
+
+\nextlipsum{5}
+
+\papertitlepage[color=light blue,submitted]{GLRS2025}
+
+\nextlipsum{8}
+
+% ---- Back matter ----
+
+\backmatter
+
+\begin{colophon}[.5\textwidth]
+\footnotesize
+\setlength{\parindent}{1pc}
+\noindent This thesis is set in Figtree, Georgia, Fira Code, and XCharter-Math.
+
+Headings and some short body text are set in Figtree, designed by Eric Kennedy in 2022. Minimalist yet friendly, Figtree is a geometric sans serif face made for the digital age.
+
+The body text face is Georgia, designed by Matthew Carter and hinted by Thomas Rickner in 1993. A serif face in the Scotch Roman style, Georgia was designed to be legible on low-resolution screens, but is equally suitable at higher resolutions and in print.
+
+The monospace face is Fira Code, designed Nikita Prokopov in 2019. It is based on the Fira Mono typeface by Carrois Apostrophe and features an extensive set of ligatures for numerous programming languages.
+
+The mathematical text is set in XCharter-Math, designed and maintained by Daniel Flipo for \TeX. This OpenType math font borrows and derives its symbols from XCharter, designed and maintained by Michael Sharpe and itself derived from Matthew Carter's Bitstream Charter (a predecessor to Georgia), as well as MathDesign by Paul Pichaureau and Fourier-GUTenberg by Michel Bovani.
+
+\mydinkus
+
+\noindent This thesis was typeset on \today{} by \formattedluatexbanner{} with \LaTeX2e{} (\fmtversion) and \textsf{expl3} (\ExplLoaderFileDate).
+\end{colophon}
+
+\end{document}

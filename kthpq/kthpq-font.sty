@@ -20,8 +20,8 @@
 \newif\ifautofigtreepath
 \autofigtreepathfalse
 
-\newcommand*{\kthpq@figtreepath@auto}{% For local setups where lualatex can find Figtree on its own
-\autofigtreepathtrue
+\newcommand*{\kthpq@figtreepath@auto}{% For local setups where TeX can find Figtree on its own
+  \autofigtreepathtrue
 }
 \csname kthpq@figtreepath@\kthpq@figtreepath\endcsname\relax
 
@@ -52,6 +52,15 @@
     BoldItalicFont = *-SemiBoldItalic,
     Scale = \fontscale
   ]
+  
+  \newfontface\uppersf{Figtree}[% for uppercase authors (add bold if needed)
+    UprightFont = *-Regular,
+    BoldFont = *-SemiBold,
+    ItalicFont = *-Italic,
+    BoldItalicFont = *-SemiBoldItalic,
+    Letters = Uppercase,
+    Scale = \fontscale
+  ]
 \else
   \setsansfont{Figtree}[
     Path = \kthpq@figtreepath,
@@ -60,6 +69,17 @@
     BoldFont = *-SemiBold,
     ItalicFont = *-Italic,
     BoldItalicFont = *-SemiBoldItalic,
+    Scale = \fontscale
+  ]
+  
+  \newfontface\uppersf{Figtree}[% for uppercase authors (add bold if needed)
+    Path = \kthpq@figtreepath,
+    Extension = .otf,
+    UprightFont = *-Regular,
+    BoldFont = *-SemiBold,
+    ItalicFont = *-Italic,
+    BoldItalicFont = *-SemiBoldItalic,
+    Letters = Uppercase,
     Scale = \fontscale
   ]
 \fi
@@ -71,14 +91,3 @@
 
 % Numbers=OldStyle if you're feeling chaotic
 \setmathfont{XCharter-Math}[Scale=\fontscale]
-
-\newfontface\uppersf{Figtree}[% for uppercase authors (add bold if needed)
-  Path = \kthpq@figtreepath,
-  Extension = .otf,
-  UprightFont = *-Regular,
-  BoldFont = *-SemiBold,
-  ItalicFont = *-Italic,
-  BoldItalicFont = *-SemiBoldItalic,
-  Letters = Uppercase,
-  Scale = \fontscale
-]

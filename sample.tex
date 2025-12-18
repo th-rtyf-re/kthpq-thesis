@@ -87,7 +87,6 @@ The \texttt{kthpq-thesis} class comes with a customized \texttt{biblatex} packag
 
 You can view the usage of \verb|\papertitlepage| in Part \ref{Part:papers}.
 
-
 \chapter{Acknowledgements}
 
 The class \texttt{kthpq-thesis} is inspired by features in the \href{https://www.kth.se/en/student/studier/examensarbete/avhandlingarochexamensarbeten/mall-for-avhandling-1.458236}{official KTH template}, although almost everything has been rewritten. I also referred to \href{https://www.overleaf.com/latex/templates/kth-phd-thesis-template-2024/kzrmpmhymhxq}{Vivian Peters' Overleaf template} when writing this class.
@@ -117,7 +116,7 @@ World & A place
 % ---- Main matter ----
 
 \mainmatter
-\newrefsection
+\newrefsection % Reset the bibliography
 
 \part{Kappa}
 
@@ -231,7 +230,6 @@ Here is some math: $1 + 1 = 2$.
 \item Write the thesis!
 \item Add tabs to the paper title pages.
 \item Make it possible to load HTML colors?
-\item Move things out of the template documents to make them simpler (not sure how much more I can do)
 \item \nextlipsum{1}
 \end{enumerate}
 
@@ -240,13 +238,15 @@ Here is some math: $1 + 1 = 2$.
 
 \part{Papers}
 \label{Part:papers}
-\newrefsection% Reset the bibliography
+\newrefsection % Reset the bibliography
+% Hide sections from table of contents (https://www.reddit.com/r/LaTeX/comments/1khta4d/comment/mr9hxeb/)
+% \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}% Uncomment
 
 \papertitlepage[color=light blue]{CGRST2024}
 
 \paperchapter[Koszul Complexes and Relative Homological Algebra]{CGRST2024}
 
-\begin{paperabstract}%[.9\textwidth]% default value
+\begin{paperabstract}[.9\textwidth]% default value
 This abstract is in a \texttt{paperabstract} environment.
 \lipsum[29]
 \end{paperabstract}
@@ -257,9 +257,15 @@ The usual approach to including papers is to include PDFs. \texttt{kthpq-thesis}
 \end{verbatim}
 where \texttt{<ref>} is the bibliography reference for the paper, and \texttt{Short title} is the title that will appear in the headers.
 
-\section{Introduction}
+\section{How to suppress paper sections in the table of contents}
 
-\nextlipsum{8}
+By default, the sections of an included \TeX{}-code paper will appear in the table of contents. You can suppress this by adding the line
+\begin{verbatim}
+\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
+\end{verbatim}
+where appropriate. The \texttt{0} means that only parts and chapters will appear from now on.
+
+\nextlipsum{6}
 
 \papertitlepage[color=light blue]{MR2021}
 
@@ -275,7 +281,7 @@ where \texttt{<ref>} is the bibliography reference for the paper, and \texttt{Sh
 
 \backmatter
 
-\begin{colophon}[.5\textwidth]
+\begin{colophon}[.5\textwidth]% default value
 \footnotesize
 \setlength{\parindent}{1pc}
 \noindent This thesis is set in Figtree, Georgia, Fira Code, and XCharter-Math.

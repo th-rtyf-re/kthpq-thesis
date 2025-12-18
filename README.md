@@ -22,14 +22,14 @@ Licensing
 
 Aside from the font files, the files of this software are marked
 [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/).
-See `LICENSE` for more details.
+See [`LICENSE`](LICENSE) for more details.
 
 Details
 -------
 
 ### Hints about usage
 
-The sample document `sample.tex` provides a mock-up of a thesis, as well as
+The sample document [`sample.tex`](sample.tex) provides a mock-up of a thesis, as well as
 hints about the class's features.
 
 ### List of features
@@ -37,31 +37,45 @@ hints about the class's features.
 `kthpq-thesis` is based on the `book` class: all options (aside from
 `figtreepath`) will be passed onto it.
 
-Options: `\documentclass[figreepath=<path>,HTML]{kthpq-thesis}`
+Loading options:
+```
+    \documentclass[figreepath=<path>,HTML]{kthpq-thesis}
+```
 - `figtreepath=<path>` will load Figtree from `<path>`. Default value is
     `auto`, which lets `fontspec` look for Figtree by itself.
 - `HTML` will load KTH colors as HTML colors. By default, KTH colors are loaded
     with their CMYK specifications.
 
+Package files:
+- [`biblatex-kthpq.sty`](kthpq/biblatex-kthpq.sty). Some options for `biblatex`
+    can only be set when loading the package: therefore `kthpq-thesis` cannot
+    load `biblatex` itself. The workaround is to provide this package,
+    `biblatex-kthpq`, that passes all options to `biblatex`, and to load this
+    package in the preamble.
+- [`fjournal.dbx`](kthpq/fjournal.dbx). Auxiliary `biblatex` file defining the
+    full journal title field.
+- [`kthpq-color.sty`](kthpq/kthpq-color.sty). Loads KTH colors.
+- [`kthpq-font.sty`](kthpq/kthpq-font.sty). Loads fonts.
+
 Loaded packages:
-- `xcolor` with option `cmyk`
-- `biblatex` via the package `biblatex-kthpq`
-- `fontspec` for loading fonts
-- `unicode-math` for loading math fonts
-- `geometry` for setting the page and margins
-- `fancyhdr` for the headers and footers
-- `titlesec` for formatting titles and sections
-- `tocloft` for formatting the table of contents
-- `babel` and `csquotes` for switching languages
-- `caption` for formatting captions
-- `enumitem` for formatting lists
+- [`xcolor`](https://ctan.org/pkg/xcolor) for specifying KTH colors
+- [`biblatex`](https://ctan.org/pkg/biblatex) for bibliography management
+- [`fontspec`](https://ctan.org/pkg/fontspec) for loading fonts
+- [`unicode-math`](https://ctan.org/pkg/unicode-math) for loading math fonts
+- [`geometry`](https://ctan.org/pkg/geometry) for setting the page size and margins
+- [`fancyhdr`](https://ctan.org/pkg/fancyhdr) for the headers and footers
+- [`titlesec`](https://ctan.org/pkg/titlesec) for formatting titles and sections
+- [`tocloft`](https://ctan.org/pkg/tocloft) for formatting the table of contents
+- [`babel`](https://ctan.org/pkg/babel) and [`csquotes`](https://ctan.org/pkg/csquotes) for switching languages
+- [`caption`](https://ctan.org/pkg/caption) for formatting captions
+- [`enumitem`](https://ctan.org/pkg/enumitem) for formatting lists
 
 and some packages mostly for internal use:
-- `kvoptions`
-- `etoolbox`
-- `emptypage`
-- `afterpage`
-- `xstring`
+- [`kvoptions`](https://ctan.org/pkg/kvoptions)
+- [`etoolbox`](https://ctan.org/pkg/etoolbox)
+- [`emptypage`](https://ctan.org/pkg/emptypage)
+- [`afterpage`](https://ctan.org/pkg/afterpage)
+- [`xstring`](https://ctan.org/pkg/xstring)
 
 Provided commands:
 - `\addchap{<name>}` creates an unnumbered chapter named `<name>` and

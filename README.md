@@ -101,6 +101,8 @@ Other provided elements:
 - `\fontscale`, set to `0.8`, is the scaling factor for most fonts.
 - KTH colors: see `kthpq/kthpq-color.sty` for the full list of color names and
     values, both in `HTML` and `cmyk`.
+- The `fjournal` field in bibliography entries is now available to `biblatex`
+    as `fjournaltitle`.
 
 This class redefines the following commands:
 - `\tableofcontents`, `\listoffigures`, `\listoftables` to add them to the

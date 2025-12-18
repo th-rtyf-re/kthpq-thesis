@@ -1,22 +1,9 @@
-% magic comments for TeXworks (including TeXShop): https://www.tug.org/TUGboat/tb32-1/tb100wright-texworks.pdf
-% !TEX TS-program = LuaLaTeX
-% !BIB TS-program = biber
-
-%figtreepath=kthphdthesis/fonts/figtree/fonts/otf/
-\documentclass{kthpq-thesis}
+\documentclass[figtreepath=kthpq/fonts/Figtree/]{kthpq-thesis}
 
 % Custom biblatex package to have cool macros
-\usepackage[%
-	backend=biber,% default is biber
-	bibstyle=numeric,
-	maxnames=99,
-	isbn=false,
-	url=false
-]{kthpq/biblatex-kthpq}
+\usepackage{kthpq/biblatex-kthpq}
 
 \addbibresource{sample.bib}
-
-\geometry{showframe}
 
 \usepackage[
 %  draft, % Uncomment to remove all links (useful for printing in black and white)
@@ -27,19 +14,6 @@
   allcolors={digital blue}
 ]{hyperref}
 
-% Custom header and footer with fancyhdr
-%\fancyhf{} % reset
-%\fancyhead[LO]{\sffamily\small\rightmark}
-%\fancyhead[RE]{\sffamily\small\leftmark}
-%\fancyhead[LE,RO]{\sffamily\small\thepage} % Left for even pages, right for odd pages
-%
-%\fancypagestyle{plain}{% for special pages, e.g. first pages of chapters
-%  \fancyhf{} % reset
-%  \fancyhead[LE,RO]{\sffamily\small\thepage} % Left for even pages, right for odd pages
-%}
-
-% \setcounter{tocdepth}{1}
-
 % ==== MY DATA ====
 
 \usepackage{lipsum}
@@ -49,7 +23,6 @@
 \setcounter{lipsumpar}{1}
 \newcommand{\nextlipsum}[1]{%
   \ifnum#1<1
-  	{}
   \else
     \edef\oldlipsumpar{\thelipsumpar}
     \addtocounter{lipsumpar}{#1}
@@ -59,7 +32,7 @@
   \fi
 }
 
-\def\mydinkus{\par\noindent\hfill\textasciitilde~\cdot~\textasciitilde\hfill\null\par}
+\def\mydinkus{\par\noindent\hfill\textasciitilde~$\cdot$~\textasciitilde\hfill\null\par}
 
 \title{Sample document and usage hints}
 \author{Isaac Ren}
@@ -76,7 +49,7 @@
 \maketitle
 \makecopyright
 
-\begin{dedication}%[stretch=2,align=r]% default options
+\begin{dedication}%[align=r,stretch=2]% default options
 For you!
 \end{dedication}
 
@@ -175,7 +148,7 @@ The font sizes for various text elements are specified by the Word template. Sin
 
 The mathematical font, XCharter-Math, is the closest to Georgia that I found. You can change this font by writing
 \begin{verbatim}
-\setmathfont{Other Font}[Scale=\fontscale]
+\setmathfont{<name>}[Scale=\fontscale]
 \end{verbatim}
 in the preamble. To get the classic \TeX font, use \texttt{Latin Modern Math}.
 
@@ -258,9 +231,8 @@ Here is some math: $1 + 1 = 2$.
 \item Write the thesis!
 \item Add tabs to the paper title pages.
 \item Make it possible to load HTML colors?
-\item Put command arguments in $\langle\textit{brackets}\rangle$.
 \item Move things out of the template documents to make them simpler (not sure how much more I can do)
-\item \lipsum[23]
+\item \nextlipsum{1}
 \end{enumerate}
 
 \printbibliography[title=References,heading=bibintoc]
@@ -281,9 +253,9 @@ This abstract is in a \texttt{paperabstract} environment.
 
 The usual approach to including papers is to include PDFs. \texttt{kthpq-thesis} does not provide any tools for that; use your favorite package or external method. If you wish to include your paper's \TeX{} code directly in the thesis, add the line
 \begin{verbatim}
-\paperchapter[Short title]{REF}
+\paperchapter[<short title>]{<ref>}
 \end{verbatim}
-where \texttt{REF} is the bibliography reference for the paper, and \texttt{Short title} is the title that will appear in the headers.
+where \texttt{<ref>} is the bibliography reference for the paper, and \texttt{Short title} is the title that will appear in the headers.
 
 \section{Introduction}
 

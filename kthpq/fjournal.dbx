@@ -1,0 +1,2 @@
+% add fjournal field to biblatex, see https://tex.stackexchange.com/a/238560/216213
+\DeclareDatamodelFields[type=field,datatype=literal]{fjournaltitle}

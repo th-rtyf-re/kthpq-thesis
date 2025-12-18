@@ -211,21 +211,6 @@
 }}
 
 % ---- Dedication with key-value options ----
-% Using the built-in keyval package: https://tex.stackexchange.com/a/34314/216213
-\define@key{kthpq@dedication}{stretch}{\def\kthpq@dedication@stretch{#1}}
-\define@key{kthpq@dedication}{align}{%
-  \ifx#1c%
-    \def\kthpq@dedication@align{\centering}%
-  \else%
-    \ifx#1l%
-      \def\kthpq@dedication@align{\raggedright}%
-    \else%
-      \def\kthpq@dedication@align{\raggedleft}%
-    \fi%
-  \fi%
-}
-\setkeys{kthpq@dedication}{align=r,stretch=2}
-
 % Usage: \begin{dedication}[align=r,stretch=2]...\end{dedication}
 \newenvironment{dedication}[1][]{%
   \setkeys{kthpq@dedication}{#1}%
@@ -239,6 +224,21 @@
   \vspace{\stretch{\kthpq@dedication@stretch}}%
   \newpage%
 }
+
+% Use the built-in keyval package: https://tex.stackexchange.com/a/34314/216213
+\define@key{kthpq@dedication}{stretch}{\def\kthpq@dedication@stretch{#1}}
+\define@key{kthpq@dedication}{align}{%
+  \ifx#1c%
+    \def\kthpq@dedication@align{\centering}%
+  \else%
+    \ifx#1l%
+      \def\kthpq@dedication@align{\raggedright}%
+    \else%
+      \def\kthpq@dedication@align{\raggedleft}%
+    \fi%
+  \fi%
+}
+\setkeys{kthpq@dedication}{align=r,stretch=2}
 % ---- end dedication ----
 
 \RequirePackage[swedish,main=english]{babel}

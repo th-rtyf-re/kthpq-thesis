@@ -17,6 +17,9 @@
 
 \PassOptionsToPackage{figtreepath=\kthpqthesis@figtreepath}{kthpq/kthpq-font}
 
+\PassOptionsToPackage{cmyk}{xcolor}
+\DeclareOption{HTML}{\PassOptionsToPackage{\CurrentOption}{xcolor}}
+
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
 
 \ProcessOptions\relax
@@ -45,7 +48,7 @@
 
 % ==== COLORS ====
 
-\RequirePackage[cmyk]{kthpq/kthpq-color}
+\RequirePackage{kthpq/kthpq-color}
 
 % ==== END COLORS ====
 

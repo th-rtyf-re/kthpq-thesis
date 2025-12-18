@@ -37,6 +37,12 @@ hints about the class's features.
 `kthpq-thesis` is based on the `book` class: all options (aside from
 `figtreepath`) will be passed onto it.
 
+Options: `\documentclass[figreepath=<path>,HTML]{kthpq-thesis}`
+- `figtreepath=<path>` will load Figtree from `<path>`. Default value is
+    `auto`, which lets `fontspec` look for Figtree by itself.
+- `HTML` will load KTH colors as HTML colors. By default, KTH colors are loaded
+    with their CMYK specifications.
+
 Loaded packages:
 - `xcolor` with option `cmyk`
 - `biblatex` via the package `biblatex-kthpq`

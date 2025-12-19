@@ -29,8 +29,8 @@ Details
 
 ### Hints about usage
 
-The sample document [`sample.tex`](sample.tex) provides a mock-up of a thesis, as well as
-hints about the class's features.
+The sample document [`sample.tex`](sample.tex) provides a mock-up of a thesis,
+as well as hints about the class's features.
 
 ### List of features
 
@@ -62,11 +62,15 @@ Loaded packages:
 - [`biblatex`](https://ctan.org/pkg/biblatex) for bibliography management
 - [`fontspec`](https://ctan.org/pkg/fontspec) for loading fonts
 - [`unicode-math`](https://ctan.org/pkg/unicode-math) for loading math fonts
-- [`geometry`](https://ctan.org/pkg/geometry) for setting the page size and margins
+- [`geometry`](https://ctan.org/pkg/geometry) for setting the page size and
+    margins
 - [`fancyhdr`](https://ctan.org/pkg/fancyhdr) for the headers and footers
-- [`titlesec`](https://ctan.org/pkg/titlesec) for formatting titles and sections
-- [`tocloft`](https://ctan.org/pkg/tocloft) for formatting the table of contents
-- [`babel`](https://ctan.org/pkg/babel) and [`csquotes`](https://ctan.org/pkg/csquotes) for switching languages
+- [`titlesec`](https://ctan.org/pkg/titlesec) for formatting titles and
+    sections
+- [`tocloft`](https://ctan.org/pkg/tocloft) for formatting the table of
+    contents
+- [`babel`](https://ctan.org/pkg/babel) and
+    [`csquotes`](https://ctan.org/pkg/csquotes) for switching languages
 - [`caption`](https://ctan.org/pkg/caption) for formatting captions
 - [`enumitem`](https://ctan.org/pkg/enumitem) for formatting lists
 
@@ -83,15 +87,15 @@ Provided commands:
 - `\makecopyright` inserts a placeholder copyright page.
 - `\keywords{<words>}` formats keywords for the thesis abstract. This command
     detects the language if the language is English or Swedish.
-- `\inlinepaper[submitted]{<ref>}` formats the bibliography entry for
-    `<ref>`. If the option `submitted` is present and `<ref>` is a `misc`
-    entry, then the output includes a "Submitted" statement. This command
-    can handle `article`, `inbook`, `incollection`, `inproceedings`, and
-    `misc` bibliography entries.
-- `\papertitlepage[color=<color>,submitted]{<ref>}` produces a divider page
-    for `<ref>`. The page will be colored `<color>`; the default color is
-    white. If the option `submitted` is present and `<ref>` is a `misc` entry,
-    then the output includes a "Submitted" statement. This command can handle
+- `\inlinepaper[misctext=<text>]{<ref>}` formats the bibliography entry for
+    `<ref>`. If `<ref>` is a `misc` entry, then the output will describe the
+    entry as `<text>`; default value is "Preprint". This command can handle
+    `article`, `inbook`, `incollection`, `inproceedings`, and `misc`
+    bibliography entries.
+- `\papertitlepage[color=<color>,misctext=<text>]{<ref>}` produces a divider
+    page for `<ref>`. The page will be colored `<color>`; the default color is
+    white. If `<ref>` is a `misc` entry, then the output will describe the
+    entry as `<text>`; default value is "Preprint". This command can handle
     `article`, `inbook`, `incollection`, `inproceedings`, and `misc`
     bibliography entries.
 - `\paperchapter[<short title>]{<ref>}` creates a chapter heading for `<ref>`.

@@ -33,17 +33,18 @@
 }
 \DeclareFieldFormat{fjournaltitle}{\mkbibemph{#1\isdot}}% copy journaltitle format
 
-\newif\if@submitted
-\@submittedfalse
+\def\defaultmisctext{Preprint}
+\let\@misctext\defaultmisctext
 
 % ---- inline paper ----
-% Usage: \inlinepaper[submitted]{<ref>}
+% Usage: \inlinepaper[misctext=Preprint]{<ref>}
 \newcommand\inlinepaper[2][]{%
   \setkeys{kthpq@inlinepaper}{#1}
   \@inlinepaper{#2}
+  \let\@misctext\defaultmisctext%
 }
 
-\define@key{kthpq@inlinepaper}{submitted}[true]{\csname @submitted#1\endcsname}
+\define@key{kthpq@inlinepaper}{misctext}{\def\@misctext{#1}}
 
 \DeclareCiteCommand{\@inlinepaper}
   {%
@@ -60,22 +61,24 @@
       In \usebibmacro{tryfjournal},
     }{}%
     \ifentrytype{inbook}{%
-      In \usebibmacro{booktitle},
+      In \printfield{booktitle},
     }{}%
     \ifentrytype{incollection}{%
-      In \usebibmacro{booktitle},
+      In \printfield{booktitle},
     }{}%
     \ifentrytype{inproceedings}{%
       In \printfield{booktitle},
     }{}%
     \ifentrytype{misc}{%
-      \if@submitted Submitted, \else Preprint, \fi
+      \@misctext\ifx\@misctext\empty\else, \fi%
     }{}%
     \printfield{year}.
     \printfield{doi}\printfield[eprint:arxiv]{eprint}%
   }
   {}
-  {\usebibmacro{postnote}}
+  {%
+    \usebibmacro{postnote}%
+  }
 
 \newbibmacro{tryfjournal}{%
   \iffieldundef{fjournaltitle}{%
@@ -89,13 +92,12 @@
 \newcounter{paper}
 
 % ---- paper title page ----
-% Usage: \papertitlepage[color=white,submitted]{<ref>}
+% Usage: \papertitlepage[color=white,misctext=Preprint]{<ref>}
 \newcommand{\papertitlepage}[2][]{%
-  \setkeys{kthpq@papertitlepage}{submitted=false,#1}
   \cleardoublepage%
   \newgeometry{top=50mm,bottom=30mm,left=43mm,right=22mm}%
   \thispagestyle{empty}%
-  \pagecolor{\kthpq@papertitlepage@color}% Set color for this page
+  \setkeys{kthpq@papertitlepage}{#1}
   \afterpage{\nopagecolor}% Reset the color after the current page
   \phantomsection
   \stepcounter{paper}
@@ -103,14 +105,14 @@
   \@papertitlepage{#2}
   \renewcommand{\thechapter}{\Alph{paper}}
   \markboth{}{}% Reset header
+  \let\@misctext\defaultmisctext
   \restoregeometry
   \newpage
 }
 
 % Using the built-in keyval package: https://tex.stackexchange.com/a/34314/216213
-\define@key{kthpq@papertitlepage}{color}{\def\kthpq@papertitlepage@color{#1}}
-\define@key{kthpq@papertitlepage}{submitted}[true]{\csname @submitted#1\endcsname}
-\setkeys{kthpq@papertitlepage}{color=white}
+\define@key{kthpq@papertitlepage}{color}{\pagecolor{#1}}
+\define@key{kthpq@papertitlepage}{misctext}{\def\@misctext{#1}}
 
 % Inner formatting of the paper cover page
 \DeclareCiteCommand{\@papertitlepage}
@@ -129,19 +131,19 @@
     {\uppersf\printnames{author}\par}
     \vspace{10mm}
     \ifentrytype{article}{%
-      In \usebibmacro{tryfjournal}\printfield{booktitle},
+      In \usebibmacro{tryfjournal},
     }{}%
     \ifentrytype{inbook}{%
-      In \usebibmacro{booktitle},
+      In \printfield{booktitle},
     }{}%
     \ifentrytype{incollection}{%
-      In \usebibmacro{booktitle},
+      In \printfield{booktitle},
     }{}%
     \ifentrytype{inproceedings}{%
       In \printfield{booktitle},
     }{}%
     \ifentrytype{misc}{%
-      \if@submitted Submitted, \else Preprint, \fi
+      \@misctext\ifx\@misctext\empty\else, \fi%
     }{}%
     \printfield{year}.%
     % \printfield[eprint:arxiv]{eprint}% maybe?

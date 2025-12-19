@@ -77,13 +77,13 @@ This is optional!
 
 \chapter{List of papers}
 
-The \texttt{kthpq-thesis} class comes with a customized \texttt{biblatex} package, \texttt{biblatex-kthpq}. This package provides the commands \verb|\inlinepaper| and \verb|\papertitlepage|, which take a bibliography key and display the reference inline and on its own page, respectively. Both commmands can handle the following entry types: \texttt{article}, \texttt{inbook}, \texttt{incollection}, \texttt{inproceedings}, and \texttt{misc}. For \texttt{misc}, add the option \texttt{[submitted]} if you have submitted the paper.
+The \texttt{kthpq-thesis} class comes with a customized \texttt{biblatex} package, \texttt{biblatex-kthpq}. This package provides the commands \verb|\inlinepaper| and \verb|\papertitlepage|, which take a bibliography key and display the reference inline and on its own page, respectively. Both commmands can handle the following entry types: \texttt{article}, \texttt{inbook}, \texttt{incollection}, \texttt{inproceedings}, and \texttt{misc}. For \texttt{misc}, add the option \texttt{misctext=<text>} to set the description to ``Submitted'' (by default it says ``Preprint'').
 
 \inlinepaper{MR2021}
 
 \inlinepaper{MR2023}
 
-\inlinepaper[submitted]{GLRS2025}
+\inlinepaper[misctext=Submitted]{GLRS2025}
 
 You can view the usage of \verb|\papertitlepage| in Part \ref{Part:papers}.
 
@@ -272,7 +272,7 @@ where appropriate. The \texttt{0} means that only parts and chapters will appear
 
 \nextlipsum{5}
 
-\papertitlepage[color=light blue,submitted]{GLRS2025}
+\papertitlepage[color=light blue,misctext=Submitted]{GLRS2025}
 
 \nextlipsum{8}
 

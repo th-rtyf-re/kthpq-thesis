@@ -1,5 +1,7 @@
 KTH-PQ thesis: a PhD thesis template for KTH Royal Institute of Technology
-============================================================================
+==========================================================================
+
+[View this repository on Overleaf](https://www.overleaf.com/read/dwzmgzfhjgrn#b133eb)
 
 General information
 -------------------
@@ -31,8 +33,7 @@ Details
 ### Hints about usage
 
 The sample document [`sample.tex`](sample.tex) provides a mock-up of a thesis,
-as well as hints about the class's features. You can view it
-[on Overleaf](https://www.overleaf.com/read/dwzmgzfhjgrn#b133eb).
+as well as hints about the class's features.
 
 ### List of features
 

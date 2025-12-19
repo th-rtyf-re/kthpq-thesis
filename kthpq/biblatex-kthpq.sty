@@ -89,29 +89,66 @@
 }
 % ---- end inline paper ----
 
-\newcounter{paper}
-
 % ---- paper title page ----
+% Paper counter
+\newcounter{paper}
+\renewcommand{\thepaper}{\Alph{paper}}
+\newcommand{\papername}{Paper}
+
+% Tab appearance
+\newlength\papertabwidth
+\newlength\papertabheight
+\newlength\papertabsep
+\def\papertabcolor{KTH blue}
+\newlength\defaultpapertitleoutermargin
+\newlength\@tabmargin
+\setlength{\defaultpapertitleoutermargin}{22mm}
+
+\newcommand{\setpapertab}[1]{\setkeys{kthpq@papertab}{#1}}
+
+\define@key{kthpq@papertab}{height}{\setlength{\papertabheight}{#1}}
+\define@key{kthpq@papertab}{width}{%
+  \setlength{\papertabwidth}{#1}%
+  \setlength{\@tabmargin}{\defaultpapertitleoutermargin}
+  \ifdim\dimexpr\papertabwidth + \marginparsep > \@tabmargin\relax
+    \global\@tabmargin\dimexpr\papertabwidth + \marginparsep
+  \fi
+}
+\define@key{kthpq@papertab}{sep}{\setlength{\papertabsep}{#1}}
+\define@key{kthpq@papertab}{color}{\def\papertabcolor{#1}}
+
+\setpapertab{width=20mm,height=10mm,sep=10mm,color=black}
+
+\def\paper@tab{%
+  \vbox to 0pt{%
+    \vspace*{\value{paper}\papertabheight}\vspace*{\value{paper}\papertabsep}\par%
+    \noindent\hspace{\dimexpr\textwidth + \@tabmargin - \papertabwidth}%
+    \color{\papertabcolor}\rule{\papertabwidth}{\papertabheight}%
+  }%
+}
+
 % Usage: \papertitlepage[color=white,misctext=Preprint]{<ref>}
 \newcommand{\papertitlepage}[2][]{%
   \cleardoublepage%
-  \newgeometry{top=50mm,bottom=30mm,left=43mm,right=22mm}%
+  \newgeometry{top=30mm,bottom=30mm,left=43mm,right=\@tabmargin}%
   \thispagestyle{empty}%
   \setkeys{kthpq@papertitlepage}{#1}
-  \afterpage{\nopagecolor}% Reset the color after the current page
   \phantomsection
+  \paper@tab% before stepping counter for better positioning
   \stepcounter{paper}
-  \addcontentsline{toc}{chapter}{\protect\numberline{\Alph{paper}}\texorpdfstring{\papertitle{#2}}{\Alph{paper}#2}}%
+  \addcontentsline{toc}{chapter}{\protect\numberline{\thepaper}\texorpdfstring{\papertitle{#2}}{\thepaper#2}}%
   \@papertitlepage{#2}
-  \renewcommand{\thechapter}{\Alph{paper}}
+  \renewcommand{\thechapter}{\thepaper}
   \markboth{}{}% Reset header
   \let\@misctext\defaultmisctext
   \restoregeometry
   \newpage
 }
 
-% Using the built-in keyval package: https://tex.stackexchange.com/a/34314/216213
-\define@key{kthpq@papertitlepage}{color}{\pagecolor{#1}}
+\define@key{kthpq@papertitlepage}{color}{%
+  \pagecolor{#1}% Set current page color
+  \afterpage{\nopagecolor}% Reset the color after the current page
+}
 \define@key{kthpq@papertitlepage}{misctext}{\def\@misctext{#1}}
 
 % Inner formatting of the paper cover page
@@ -124,7 +161,7 @@
   }
   {%
     \par\vspace*{5mm}
-    {\Huge\noindent\sffamily\bfseries Paper~\Alph{paper}\par}
+    {\Huge\noindent\sffamily\bfseries \papername\ \thepaper\par}
     \vspace{10mm}
     {\Large\noindent\sffamily\bfseries\printfield{labeltitle}\par}
     \vspace{10mm}
@@ -158,9 +195,9 @@
 % Usage: \paperchapter[<short title>]{<ref>}
 \newcommand\paperchapter[2][\@nil]{%
   \ifx#1\@nil
-    \@paperchapter{Paper\ \Alph{paper}.\ \papertitle{#2}}{\papertitle{#2}}%
+    \@paperchapter{\papername\ \thepaper.\ \papertitle{#2}}{\papertitle{#2}}%
   \else
-    \@paperchapter{Paper\ \Alph{paper}.\ #1}{\papertitle{#2}}%
+    \@paperchapter{\papername\ \thepaper.\ #1}{\papertitle{#2}}%
   \fi%
 }
 

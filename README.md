@@ -103,6 +103,10 @@ Provided commands:
     an included paper in a compilation thesis. `<short title>` is the title
     that appears in headers and footers; the default value is the title of
     `<ref>`.
+- `\setpapertab{width=<width>,height=<height>,sep=<sep>,color=<color>}`. This
+    command sets the tabs that appear in the outer margin of the paper divider
+    pages. Each tab is lower than the last: `sep` is the vertical space between
+    successive tabs. To remove the tab, set `height=0pt`.
 
 Provided environments:
 - `\begin{dedication}[align=r,stretch=2]...\end{dedication}` creates a
@@ -122,9 +126,16 @@ Provided environments:
     `<width>` is `.5\textwidth`.
 
 Other provided elements:
-- `\fontscale`, set to `0.8`, is the scaling factor for most fonts.
 - KTH colors: see `kthpq/kthpq-color.sty` for the full list of color names and
     values, both in `HTML` and `cmyk`.
+- `\papername` and `\thepaper`, defining how included papers are named. Default
+    values are `Paper` and `\Alph{paper}`, respectively, where `paper` is a new
+    counter.
+- `\papertabwidth`, `\papertabheight`, `\papertabsep`, and
+    `\defaultpapertitleoutermargin`. These control the appearance of tabs on
+    the paper divider pages. The actual margin of the page is set as the
+    maximum between the width and the default outer margin.
+- `\fontscale`, set to `0.8`, is the scaling factor for most fonts.
 - The `fjournal` field in bibliography entries is now available to `biblatex`
     as `fjournaltitle`.
 

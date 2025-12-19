@@ -4,23 +4,24 @@ KTH-PQ thesis: a PhD thesis template for KTH Royal Institute of Technology
 General information
 -------------------
 
-This software provides a LuaLaTeX PhD thesis template following KTH's
+This package provides `kthpq-thesis`, a LuaLaTeX PhD thesis class following
+KTH's
 [Brand guidelines](https://intra.kth.se/en/administration/kommunikation/varumarke/grafiskprofil/kth-s-grafiska-profil-1.844676),
 published in October 2023, and their
 [thesis template](https://www.kth.se/en/student/studier/examensarbete/avhandlingarochexamensarbeten/mall-for-avhandling-1.458236).
 This package is not directly supported by KTH or its communications department.
 
-The intent for this class is to be as simple as possible, ready for use without
-modifications, but also customizable with as small a learning curve as possible.
+The intent for this class is to be simple, ready for use without modifications,
+but also customizable with as small a learning curve as possible.
 
 `kthpq-thesis` is meant to be compiled with LuaLaTeX. Some commands
-may break if using a different "engine". This software can be copy-pasted as-is
-into a local directory or a new Overleaf project.
+may break if using a different "engine". This repository can be copy-pasted
+as-is into a local directory or a new Overleaf project.
 
 Licensing
 ---------
 
-Aside from the font files, the files of this software are marked
+Aside from the font files, the files of this package are marked
 [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/).
 See [`LICENSE`](LICENSE) for more details.
 

@@ -61,16 +61,16 @@
 
 % ==== HEADER & FOOTER ====
 
-\RequirePackage{emptypage} % Suppress page numbers on otherwise empty pages
+\RequirePackage{emptypage}% Suppress page numbers on otherwise empty pages
 \RequirePackage{fancyhdr}
 
 \pagestyle{fancy}
 \renewcommand{\headrulewidth}{0pt}
-\fancyhf{} % reset
+\fancyhf{}% reset
 % Set up the header and footer
 \fancyhead[RO]{\sffamily\small\rightmark}
 \fancyhead[LE]{\sffamily\small\leftmark}
-\fancyfoot[LE,RO]{\sffamily\small\thepage} % Left for even pages, right for odd pages
+\fancyfoot[LE,RO]{\sffamily\small\thepage}% Left for even pages, right for odd pages
 
 \fancypagestyle{plain}{%
   \fancyhf{}%
@@ -89,15 +89,15 @@
   {}{0em}{}
 
 \titleformat{\chapter}
-  {\sffamily\fontsize{24pt}{24pt}\selectfont\bfseries\raggedright} % Figtree Medium, exact 24pt
+  {\sffamily\fontsize{24pt}{24pt}\selectfont\mediumsf\raggedright}% Figtree Semibold, exact 24pt
   {\makebox[0pt][r]{\thechapter\hspace{8mm}}}{0em}{}
 
 \titleformat{\section}
-  {\sffamily\fontsize{13pt}{13pt}\selectfont\bfseries} % Figtree Semibold, 13pt
+  {\sffamily\fontsize{13pt}{13pt}\selectfont\bfseries}% Figtree Semibold, 13pt
   {\thesection}{1em}{}
 
 \titleformat{\subsection}
-  {\sffamily\fontsize{12pt}{12pt}\selectfont\bfseries} % Figtree Semibold, 13pt
+  {\sffamily\fontsize{12pt}{12pt}\selectfont\bfseries}% Figtree Semibold, 13pt
   {\thesubsection}{1em}{}
 
 \titleformat{\subsubsection}
@@ -120,7 +120,7 @@
 \setlength{\cftbeforechapskip}{1ex}
 \setlength{\cftbeforesecskip}{0.5ex}
 
-% Name font
+% Font
 \def\tocfont{\sffamily}
 \renewcommand{\cftpartfont}{\tocfont\bfseries\large}
 \renewcommand{\cftchapfont}{\tocfont\bfseries}
@@ -161,13 +161,13 @@
   \@starttoc{toc}%
   \if@restonecol\twocolumn\fi%
 }
+% Patch the others
+\RequirePackage{etoolbox}
+
 \newcommand{\addchap}[1]{%
   \chapter*{#1}%
   \addcontentsline{toc}{chapter}{#1}%
 }
-% Patch the others
-\RequirePackage{etoolbox}
-
 \patchcmd{\listoffigures}{\chapter*}{\addchap}{}{}
 \patchcmd{\listoftables}{\chapter*}{\addchap}{}{}
 
@@ -178,8 +178,7 @@
 \renewcommand{\maketitle}{%
   \newgeometry{top=30mm,bottom=30mm,left=24mm,right=18mm}
   \begin{titlepage}
-    \raggedright
-    \sffamily
+    \raggedright\sffamily
     \vspace*{25mm}
     \Huge\bfseries\@title\par
     \vspace{8mm}
@@ -198,8 +197,7 @@
 
 \newcommand{\makecopyright}{{% double brace to isolate typestting
   \thispagestyle{empty}
-  \raggedright
-  \sffamily
+  \raggedright\sffamily
   \vspace*{\fill}\par% Fills the vertical space
   \fontsize{10pt}{10pt}\selectfont
   \textcopyright{} \@author~\the\year{}\par
@@ -305,7 +303,7 @@
 % ==== LISTS ====
 \RequirePackage{enumitem}
 
-% presecribed 10mm margin (which we scale down), 1.25pt paragraph spacing
+% prescribed 10mm margin (which we scale down), 1.25pt paragraph spacing
 \setlist{leftmargin=8mm,itemindent=0pt,itemsep=0pt,parsep=1.25pt}
 
 % ==== END LISTS ====

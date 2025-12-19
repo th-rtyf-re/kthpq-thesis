@@ -57,6 +57,9 @@
     Letters = Uppercase,
     Scale = \fontscale
   ]
+  
+  % for chapter titles
+  \newfontface\mediumsf{Figtree}[UprightFont=*-Medium,Scale=\fontscale]
 \else
   \setsansfont{Figtree}[
     Path = \kthpq@figtreepath,
@@ -77,6 +80,13 @@
     BoldItalicFont = *-SemiBoldItalic,
     Letters = Uppercase,
     Scale = \fontscale
+  ]
+  
+  \newfontface\mediumsf{Figtree}[% for chapter titles
+    Path = \kthpq@figtreepath,
+    Extension = .otf,
+    UprightFont = *-Medium,
+    Scale=\fontscale
   ]
 \fi
 

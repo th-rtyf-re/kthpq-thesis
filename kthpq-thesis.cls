@@ -89,7 +89,7 @@
   {}{0em}{}
 
 \titleformat{\chapter}
-  {\sffamily\fontsize{24pt}{24pt}\selectfont\mediumsf\raggedright}% Figtree Semibold, exact 24pt
+  {\fontsize{24pt}{24pt}\selectfont\mediumsf\raggedright}% Figtree Semibold, exact 24pt
   {\makebox[0pt][r]{\thechapter\hspace{8mm}}}{0em}{}
 
 \titleformat{\section}

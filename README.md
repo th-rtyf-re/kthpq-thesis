@@ -37,14 +37,15 @@ as well as hints about the class's features.
 `kthpq-thesis` is based on the `book` class: all options (aside from
 `figtreepath`) will be passed onto it.
 
-Loading options:
+The class is typically loaded as folows:
 ```
-    \documentclass[figreepath=<path>,HTML]{kthpq-thesis}
+    \documentclass[figreepath=<path>]{kthpq-thesis}
 ```
 - `figtreepath=<path>` will load Figtree from `<path>`. Default value is
     `auto`, which lets `fontspec` look for Figtree by itself.
-- `HTML` will load KTH colors as HTML colors. By default, KTH colors are loaded
-    with their CMYK specifications.
+- `cmyk` and `HTML` are also available options, which will load KTH colors as
+    CMYK and HTML colors, respectively. The `cmyk` option is loaded by default,
+    as this is most appropriate for printing.
 
 Package files:
 - [`biblatex-kthpq.sty`](kthpq/biblatex-kthpq.sty). Some options for `biblatex`
@@ -126,8 +127,8 @@ Provided environments:
     `<width>` is `.5\textwidth`.
 
 Other provided elements:
-- KTH colors: see `kthpq/kthpq-color.sty` for the full list of color names and
-    values, both in `HTML` and `cmyk`.
+- KTH colors: see [`kthpq/kthpq-color.sty`](kthpq/kthpq-color.sty) for the full
+    list of color names and values, both in `HTML` and `cmyk`.
 - `\papername` and `\thepaper`, defining how included papers are named. Default
     values are `Paper` and `\Alph{paper}`, respectively, where `paper` is a new
     counter.

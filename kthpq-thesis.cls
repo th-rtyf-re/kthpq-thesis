@@ -19,6 +19,7 @@
 
 \PassOptionsToPackage{cmyk}{kthpq/kthpq-color}
 \DeclareOption{HTML}{\PassOptionsToPackage{\CurrentOption}{kthpq/kthpq-color}}
+\DeclareOption{cmyk}{\PassOptionsToPackage{\CurrentOption}{kthpq/kthpq-color}}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
 

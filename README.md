@@ -38,7 +38,7 @@ as well as hints about the class's features.
 ### List of features
 
 `kthpq-thesis` is based on the `book` class: all options (aside from
-`figtreepath`) will be passed onto it.
+those specified below) will be passed onto it.
 
 The class is typically loaded as folows:
 ```

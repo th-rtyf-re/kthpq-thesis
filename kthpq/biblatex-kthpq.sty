@@ -142,12 +142,14 @@
   \markboth{}{}% Reset header
   \let\@misctext\defaultmisctext
   \restoregeometry
+  \vfil\newpage\null
+  \thispagestyle{empty}
+  \afterpage{\nopagecolor}% Reset the color after the current page
   \newpage
 }
 
 \define@key{kthpq@papertitlepage}{color}{%
   \pagecolor{#1}% Set current page color
-  \afterpage{\nopagecolor}% Reset the color after the current page
 }
 \define@key{kthpq@papertitlepage}{misctext}{\def\@misctext{#1}}
 

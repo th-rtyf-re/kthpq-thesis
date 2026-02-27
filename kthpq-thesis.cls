@@ -175,21 +175,29 @@
 
 % ==== FRONT MATTER ====
 
+\def\@subtitle{}
+\newcommand{\subtitle}[1]{\def\@subtitle{#1}}
+
 \renewcommand{\maketitle}{%
   \newgeometry{top=30mm,bottom=30mm,left=24mm,right=18mm}
   \begin{titlepage}
-    \raggedright\sffamily
-    \vspace*{25mm}
-    \Huge\bfseries\@title\par
+    \raggedright\sffamily%
+    \vspace*{25mm}%
+    \Huge\bfseries\@title\\
+    \ifx\@subtitle\@empty\relax
+    \else%
+        \vspace{3mm}%
+        \mediumsf\fontsize{14pt}{15.68pt}\selectfont\@subtitle\\
+    \fi
     \vspace{8mm}
-    \normalsize\bfseries\expandafter\MakeUppercase\expandafter\@author\par
+    \normalsize\bfseries\expandafter\MakeUppercase\expandafter\@author\\
     \vspace{20mm}
     \fontsize{10pt}{10pt}\selectfont\mdseries
-    Academic Dissertation which, with due permission of the KTH Royal Institute of Technology, is submitted for public defense for the Degree of Doctor of Philosophy at a Future Time in a Future Place.\par
+    Academic Dissertation which, with due permission of the KTH Royal Institute of Technology, is submitted for public defense for the Degree of Doctor of Philosophy at a Future Time in a Future Place.\\
     \vfill
     \footnotesize
-    Doctoral Thesis in a Field\par
-    KTH Royal Institute of Technology\par
+    Doctoral Thesis in a Program\\
+    KTH Royal Institute of Technology\\
     Stockholm, Sweden \the\year
   \end{titlepage}
   \restoregeometry
@@ -202,10 +210,10 @@
   \fontsize{10pt}{10pt}\selectfont
   \textcopyright{} \@author~\the\year{}\par
   All Rights Reserved. No part of this work may be reproduced in any form without the written permission of the copyright owner.\par
-  Published articles have been reprinted with permission from their respective copyright holders.\par
+  Published articles have been reprinted with permission from their respective copyright holders.\\
   \vspace{5mm}
-  TRITA-ABC-DEF YYYY:XX\par
-  ISBN 987-65-4321-012-8\par
+  TRITA-ABC-DEF YYYY:XX\\
+  ISBN 987-65-4321-012-8\\
   Printed by Universitetsservice US-AB, Sweden \the\year{}%
 }}
 
@@ -253,7 +261,7 @@
 \newcommand{\keywords}[1]{%
   \par%
   \vspace{0.5\baselineskip}%
-  \noindent\textbf{\iflanguage{swedish}{Nyckelord}{Keywords}}\par%
+  \noindent\textbf{\iflanguage{swedish}{Nyckelord}{Keywords}}\\%
   \noindent#1%
 }
 

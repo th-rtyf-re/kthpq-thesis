@@ -103,7 +103,7 @@ Provided commands:
     `article`, `inbook`, `incollection`, `inproceedings`, and `misc`
     bibliography entries.
 - `\paperchapter[<short title>]{<ref>}` creates a chapter heading for `<ref>`.
-    This command is meant to be used when directly including the `TeX` code for
+    This command is meant to be used when directly including the TeX code for
     an included paper in a compilation thesis. `<short title>` is the title
     that appears in headers and footers; the default value is the title of
     `<ref>`.
@@ -122,9 +122,9 @@ Provided environments:
     abstract. The default `<language>` is `english`, and `swedish` is also
     available.
 - `\begin{paperabstract}[<width>]...\end{paperabstract}` creates the abstract
-    for a paper, useful when directly including the `TeX` code of an included
+    for a paper, useful when directly including the TeX code of an included
     paper in a compilation thesis. The abstract is centered, with width
-    `<width`. Default `<width>` is `.9\textwidth`.
+    `<width>`. Default `<width>` is `.9\textwidth`.
 - `\begin{colophon}[<width>]...\end{colophon}` creates a colophon,
     horizontally and vertically centered, with width `<width>`. Default
     `<width>` is `.5\textwidth`.

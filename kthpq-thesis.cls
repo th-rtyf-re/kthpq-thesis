@@ -4,6 +4,23 @@
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{kthpq-thesis}[2025/12/12 KTH PhD thesis class]
 
+\RequirePackage{iftex}
+\ifluatex
+\else
+  \ifxetex
+  \else
+    % Raise fatal error: https://tex.stackexchange.com/a/666538/216213
+    \ExplSyntaxOn
+      \msg_new:nnn {kthpq-thesis}{unsupported-engine}{
+        The~class~kthpq-thesis~requires~LuaLaTeX~(XeLaTeX~might~also~work,~but~
+        is~not~directly~supported).~Please~change~your~typesetting~engine~to~
+        "lualatex"~or~similar.
+      }
+      \msg_fatal:nn {kthpq-thesis}{unsupported-engine}
+    \ExplSyntaxOff
+  \fi
+\fi
+
 \RequirePackage{kvoptions}
 
 % Options

@@ -39,8 +39,8 @@
 % ---- inline paper ----
 % Usage: \inlinepaper[misctext=Preprint]{<ref>}
 \newcommand\inlinepaper[2][]{%
-  \setkeys{kthpq@inlinepaper}{#1}
-  \@inlinepaper{#2}
+  \setkeys{kthpq@inlinepaper}{#1}%
+  \@inlinepaper{#2}%
   \let\@misctext\defaultmisctext%
 }
 

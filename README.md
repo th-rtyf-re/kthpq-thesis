@@ -35,6 +35,13 @@ Details
 The sample document [`sample.tex`](sample.tex) provides a mock-up of a thesis,
 as well as hints about the class's features.
 
+### mathtools
+
+The `mathtools` package will complain if loaded after `unicode-math`, which is
+required by the class. If you want this package, then a solution is to add the
+line `\RequirePackage{mathtools}` before declaring the `documentclass`. If
+this is unpleasant for you, you can always edit the class files instead :)
+
 ### List of features
 
 `kthpq-thesis` is based on the `book` class: all options (aside from

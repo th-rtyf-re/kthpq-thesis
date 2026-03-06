@@ -203,14 +203,19 @@
   \restoregeometry
 }
 
+\def\@copyrighttext{%
+  All Rights Reserved. No part of this work may be reproduced in any form without the written permission of the copyright owner.\par
+  Published articles have been reprinted with permission from their respective copyright holders.%
+}
+\newcommand{\copyrighttext}[1]{\def\@copyrighttext{#1}}
+
 \newcommand{\makecopyright}{{% double brace to isolate typestting
   \thispagestyle{empty}
   \raggedright\sffamily
   \vspace*{\fill}\par% Fills the vertical space
   \fontsize{10pt}{10pt}\selectfont
   \textcopyright{} \@author~\the\year{}\par
-  All Rights Reserved. No part of this work may be reproduced in any form without the written permission of the copyright owner.\par
-  Published articles have been reprinted with permission from their respective copyright holders.\\
+  \@copyrighttext\\
   \vspace{5mm}
   TRITA-ABC-DEF YYYY:XX\\
   ISBN 987-65-4321-012-8\\

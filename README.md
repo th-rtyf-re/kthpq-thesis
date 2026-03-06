@@ -86,6 +86,12 @@ and some packages mostly for internal use:
 - [`xstring`](https://ctan.org/pkg/xstring)
 
 Provided commands:
+- `\subtitle{<subtitle>}` creates a subtitle. Leave empty if there is no
+    subtitle.
+- `\copyrighttext{<text>}` updates the copyright text on the copyright page.
+    Remember that this is not the official copyright page, which will be
+    provided by US-AB. If not set, then a general copyright disclaimer is
+    provided.
 - `\addchap{<name>}` creates an unnumbered chapter named `<name>` and
     adds it to the table of contents (copied from KOMA-Script).
 - `\makecopyright` inserts a placeholder copyright page.
